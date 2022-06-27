@@ -94,5 +94,6 @@ module.exports = {
     "require-jsdoc": 0,
     "react-hooks/exhaustive-deps": "off",
     "prefer-template": "error",
+    "react/react-in-jsx-scope": "off",
   },
 };
