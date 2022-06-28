@@ -1,15 +1,13 @@
-import { Global } from "@emotion/react";
 import React from "react";
 
 import { TaskList } from "./pages/task-list";
-import { globalStyles } from "./styles";
-
+import { Provider } from "./provider";
+import { store } from "./stores/store";
 function App() {
   return (
-    <>
-      <Global styles={globalStyles} />
+    <Provider store={store}>
       <TaskList />
-    </>
+    </Provider>
   );
 }
 

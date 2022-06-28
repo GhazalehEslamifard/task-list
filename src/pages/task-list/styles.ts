@@ -74,9 +74,9 @@ export const StyledSpan = styled.p`
   text-overflow: ellipsis;
 `;
 
-export const BookmarkButton = styled.button`
+export const StarButton = styled.button<{ isActivated: boolean }>`
   svg {
-    fill: #e8b923;
+    fill: ${({ isActivated }): string => (isActivated ? "#e8b923" : "#e6e6e6")};
   }
 `;
 

@@ -1,29 +1,41 @@
-import { memo } from "react";
+import { observer } from "mobx-react-lite";
+import { useCallback } from "react";
 
 import { StarIcon, EditIcon, CloseIcon } from "../../lib/assets/icons";
-import { taskList } from "../../mockData";
+import { useStore } from "../../stores/store";
+import { TaskType } from "../../stores/task";
 
 import {
   List,
   ListItem,
   StyledSpan,
-  BookmarkButton,
+  StarButton,
   Wrapper,
   Checkbox,
   StyledLabel,
 } from "./styles";
 
 function TaskListComponent(): React.ReactElement {
+  const store = useStore();
+
+  const handleToggleStarTag = useCallback(
+    (task: TaskType) => task.toggleStarTag(),
+    []
+  );
+
   return (
     <List>
-      {taskList.map((task) => (
+      {store.tasks.map((task) => (
         <ListItem key={task.id}>
           <StyledLabel htmlFor="checkbox">Multi-select checkbox</StyledLabel>
           <Checkbox type="checkbox" id="checkbox" />
           <StyledSpan>{task.description}</StyledSpan>
-          <BookmarkButton>
+          <StarButton
+            onClick={() => handleToggleStarTag(task)}
+            isActivated={task.hasStarTag}
+          >
             <StarIcon />
-          </BookmarkButton>
+          </StarButton>
           <Wrapper>
             <button>
               <EditIcon />
@@ -38,4 +50,4 @@ function TaskListComponent(): React.ReactElement {
   );
 }
 
-export const TaskList = memo(TaskListComponent);
+export const TaskList = observer(TaskListComponent);
