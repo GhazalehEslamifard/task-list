@@ -5,7 +5,7 @@ export const Task = types
   .model("Task", {
     hasStarTag: types.optional(types.boolean, false),
     description: types.string,
-    id: types.optional(types.identifier, uuid.v4()),
+    id: types.optional(types.identifier, () => uuid.v4()),
   })
   .actions((self) => ({
     toggleStarTag() {

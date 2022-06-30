@@ -1,5 +1,3 @@
-import { TaskType } from "./stores/task";
-
 export const taskList = [
   {
     description:
