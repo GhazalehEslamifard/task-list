@@ -15,13 +15,16 @@ import {
 interface Props {
   task: TaskType;
   onToggleStarTag: (task: TaskType) => void;
+  onDelete: (task: TaskType) => void;
 }
 
 function TaskItemComponent({
   task,
   onToggleStarTag,
+  onDelete,
 }: Props): React.ReactElement {
   const handleToggleStarTag = useCallback(() => onToggleStarTag(task), [task]);
+  const handleDeleteTask = useCallback(() => onDelete(task), [task]);
 
   return (
     <ListItem>
@@ -35,7 +38,7 @@ function TaskItemComponent({
         <button>
           <EditIcon />
         </button>
-        <button>
+        <button onClick={handleDeleteTask}>
           <CloseIcon />
         </button>
       </Wrapper>

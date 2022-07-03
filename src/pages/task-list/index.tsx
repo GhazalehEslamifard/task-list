@@ -13,10 +13,19 @@ function TaskListComponent(): React.ReactElement {
     task.toggleStarTag();
   }, []);
 
+  const deleteTask = useCallback((task: TaskType) => {
+    store.deleteTask(task);
+  }, []);
+
   return (
     <List>
       {store.tasks.map((task) => (
-        <TaskItem task={task} onToggleStarTag={toggleStarTag} key={task.id} />
+        <TaskItem
+          task={task}
+          onToggleStarTag={toggleStarTag}
+          onDelete={deleteTask}
+          key={task.id}
+        />
       ))}
     </List>
   );
