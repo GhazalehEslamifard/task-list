@@ -16,20 +16,32 @@ interface Props {
   task: TaskType;
   onToggleStarTag: (task: TaskType) => void;
   onDelete: (task: TaskType) => void;
+  selectedTasks: TaskType[] | undefined;
+  onCheckboxChange: (task: TaskType) => void;
 }
 
 function TaskItemComponent({
   task,
   onToggleStarTag,
   onDelete,
+  selectedTasks,
+  onCheckboxChange,
 }: Props): React.ReactElement {
   const handleToggleStarTag = useCallback(() => onToggleStarTag(task), [task]);
   const handleDeleteTask = useCallback(() => onDelete(task), [task]);
+  const handleCheckboxChange = useCallback(() => {
+    onCheckboxChange(task);
+  }, [task]);
 
   return (
     <ListItem>
       <StyledLabel htmlFor="checkbox">Multi-select checkbox</StyledLabel>
-      <Checkbox type="checkbox" id="checkbox" />
+      <Checkbox
+        type="checkbox"
+        id="checkbox"
+        checked={selectedTasks ? selectedTasks.includes(task) : false}
+        onChange={handleCheckboxChange}
+      />
       <StyledSpan>{task.description}</StyledSpan>
       <StarButton onClick={handleToggleStarTag} isActivated={task.hasStarTag}>
         <StarIcon />

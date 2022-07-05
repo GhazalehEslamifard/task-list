@@ -8,6 +8,21 @@ export const List = styled.ul`
   background: #f5f7ff;
 `;
 
+export const DeleteButton = styled.button`
+  all: unset;
+  width: 104px;
+  height: 32px;
+  color: white;
+  border-radius: 4px;
+  text-align: center;
+  box-sizing: border-box;
+  background: rgba(255, 116, 56, 0.8);
+
+  :disabled {
+    background: rgba(255, 116, 56, 0.4);
+  }
+`;
+
 export const ListItem = styled.li`
   display: flex;
   align-items: center;

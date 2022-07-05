@@ -10,8 +10,8 @@ export const Store = types
     tasks: types.array(Task),
   })
   .actions(() => ({
-    deleteTask(task: TaskType) {
-      destroy(task);
+    deleteTasks(tasks: TaskType[]) {
+      tasks.map((task) => destroy(task));
     },
   }));
 
