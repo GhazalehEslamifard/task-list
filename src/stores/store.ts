@@ -9,9 +9,12 @@ export const Store = types
   .model("Tasks", {
     tasks: types.array(Task),
   })
-  .actions(() => ({
+  .actions((self) => ({
     deleteTasks(tasks: TaskType[]) {
       tasks.map((task) => destroy(task));
+    },
+    createTask(description: string) {
+      self.tasks.push(Task.create({ description }));
     },
   }));
 

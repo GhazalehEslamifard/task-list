@@ -10,7 +10,7 @@ import {
   StyledLabel,
   StyledSpan,
   Wrapper,
-} from "../../styles";
+} from "../styles";
 
 interface Props {
   task: TaskType;

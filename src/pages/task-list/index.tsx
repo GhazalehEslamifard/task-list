@@ -3,8 +3,8 @@ import { useCallback, useState } from "react";
 
 import { useStore } from "../../stores/store";
 import { TaskType } from "../../stores/task";
-import { List, DeleteButton } from "../styles";
 
+import { List, DeleteButton } from "./styles";
 import { TaskItem } from "./task-item";
 
 function TaskListComponent(): React.ReactElement {
