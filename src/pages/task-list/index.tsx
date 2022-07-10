@@ -1,15 +1,17 @@
 import { observer } from "mobx-react-lite";
 import { useCallback, useState } from "react";
+import { Link } from "react-router-dom";
 
 import { useStore } from "../../stores/store";
 import { TaskType } from "../../stores/task";
 
-import { List, DeleteButton } from "./styles";
+import { List, DeleteButton, ActionsWrapper } from "./styles";
 import { TaskItem } from "./task-item";
 
 function TaskListComponent(): React.ReactElement {
   const store = useStore();
   const [selectedTasks, setSelectedTasks] = useState<TaskType[] | undefined>();
+
   const toggleStarTag = useCallback((task: TaskType) => {
     task.toggleStarTag();
   }, []);
@@ -39,11 +41,14 @@ function TaskListComponent(): React.ReactElement {
 
   return (
     <>
-      {store.tasks.length === 0 ? null : (
-        <DeleteButton onClick={deleteSelectedTask} disabled={!selectedTasks}>
-          Delete
-        </DeleteButton>
-      )}
+      <ActionsWrapper>
+        <Link to="/create-task">create a task</Link>
+        {store.tasks.length === 0 ? null : (
+          <DeleteButton onClick={deleteSelectedTask} disabled={!selectedTasks}>
+            Delete
+          </DeleteButton>
+        )}
+      </ActionsWrapper>
       <List>
         {store.tasks.map((task) => (
           <TaskItem

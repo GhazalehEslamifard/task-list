@@ -1,4 +1,5 @@
 import { memo, useCallback, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import {
   StyledTextarea,
@@ -14,6 +15,7 @@ interface Props {
 }
 
 function TaskFormComponent({ onSubmit, isEditing }: Props): React.ReactElement {
+  const navigate = useNavigate();
   const [description, setDescription] = useState("");
 
   const handleTextareaChange = useCallback(
@@ -27,13 +29,19 @@ function TaskFormComponent({ onSubmit, isEditing }: Props): React.ReactElement {
     onSubmit(description);
   }, [description]);
 
+  const discardChanges = useCallback(() => {
+    navigate(-1);
+  }, []);
+
   return (
     <Container>
       <form onSubmit={saveTask}>
         <Wrapper>
           <StyledButton type="submit">Save</StyledButton>
           <h1>{isEditing ? "Edit Task" : "Add Task"}</h1>
-          <StyledButton type="button">Cancel</StyledButton>
+          <StyledButton type="button" onClick={discardChanges}>
+            Cancel
+          </StyledButton>
         </Wrapper>
         <StyledLabel>
           Description:

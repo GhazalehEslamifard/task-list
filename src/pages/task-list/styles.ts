@@ -19,7 +19,28 @@ export const DeleteButton = styled.button`
   background: rgba(255, 116, 56, 0.8);
 
   :disabled {
-    background: rgba(255, 116, 56, 0.4);
+    background: rgba(255, 116, 56, 0.3);
+  }
+
+  :focus {
+    outline: 2px solid cornflowerblue;
+  }
+`;
+
+export const ActionsWrapper = styled.div`
+  width: fit-content;
+  padding: 2px;
+
+  a {
+    all: unset;
+    color: cornflowerblue;
+    margin-right: 16px;
+    padding: 4px;
+    border-radius: 4px;
+
+    :focus {
+      outline: 2px solid cornflowerblue;
+    }
   }
 `;
 
