@@ -16,6 +16,7 @@ interface Props {
   task: TaskType;
   onToggleStarTag: (task: TaskType) => void;
   onDelete: (task: TaskType) => void;
+  onEdit: (task: TaskType) => void;
   selectedTasks: TaskType[] | undefined;
   onCheckboxChange: (task: TaskType) => void;
 }
@@ -24,11 +25,13 @@ function TaskItemComponent({
   task,
   onToggleStarTag,
   onDelete,
+  onEdit,
   selectedTasks,
   onCheckboxChange,
 }: Props): React.ReactElement {
   const handleToggleStarTag = useCallback(() => onToggleStarTag(task), [task]);
   const handleDeleteTask = useCallback(() => onDelete(task), [task]);
+  const handleEditTask = useCallback(() => onEdit(task), [task]);
   const handleCheckboxChange = useCallback(() => {
     onCheckboxChange(task);
   }, [task]);
@@ -47,7 +50,7 @@ function TaskItemComponent({
         <StarIcon />
       </StarButton>
       <Wrapper>
-        <button>
+        <button onClick={handleEditTask}>
           <EditIcon />
         </button>
         <button onClick={handleDeleteTask}>

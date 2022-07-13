@@ -11,6 +11,9 @@ export const Task = types
     toggleStarTag() {
       self.hasStarTag = !self.hasStarTag;
     },
+    editTask(description: string) {
+      self.description = description;
+    },
   }));
 
 export type TaskType = Instance<typeof Task>;

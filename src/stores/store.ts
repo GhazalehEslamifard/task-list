@@ -8,6 +8,7 @@ import { Task, TaskType } from "./task";
 export const Store = types
   .model("Tasks", {
     tasks: types.array(Task),
+    editingTask: types.maybe(types.reference(Task)),
   })
   .actions((self) => ({
     deleteTasks(tasks: TaskType[]) {
@@ -15,6 +16,9 @@ export const Store = types
     },
     createTask(description: string) {
       self.tasks.push(Task.create({ description }));
+    },
+    setEditingTask(task: TaskType | undefined) {
+      self.editingTask = task;
     },
   }));
 

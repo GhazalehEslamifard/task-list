@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
-import { useCallback, useState } from "react";
-import { Link } from "react-router-dom";
+import { useCallback, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 import { useStore } from "../../stores/store";
 import { TaskType } from "../../stores/task";
@@ -9,11 +9,21 @@ import { List, DeleteButton, ActionsWrapper } from "./styles";
 import { TaskItem } from "./task-item";
 
 function TaskListComponent(): React.ReactElement {
+  const navigate = useNavigate();
   const store = useStore();
   const [selectedTasks, setSelectedTasks] = useState<TaskType[] | undefined>();
 
+  useEffect(() => {
+    store.setEditingTask(undefined);
+  });
+
   const toggleStarTag = useCallback((task: TaskType) => {
     task.toggleStarTag();
+  }, []);
+
+  const setEditingTask = useCallback((task: TaskType) => {
+    store.setEditingTask(task);
+    navigate(`edit-task/:${task.id}`);
   }, []);
 
   const handleSetSelectedTasks = useCallback((task: TaskType) => {
@@ -54,6 +64,7 @@ function TaskListComponent(): React.ReactElement {
           <TaskItem
             task={task}
             onToggleStarTag={toggleStarTag}
+            onEdit={setEditingTask}
             onDelete={deleteTask}
             selectedTasks={selectedTasks}
             onCheckboxChange={handleSetSelectedTasks}

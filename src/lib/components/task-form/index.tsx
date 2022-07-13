@@ -1,4 +1,5 @@
-import { memo, useCallback, useState } from "react";
+import { observer } from "mobx-react-lite";
+import React, { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import {
@@ -12,11 +13,18 @@ import {
 interface Props {
   onSubmit: (description: string) => void;
   isEditing: boolean;
+  defaultValue?: string;
 }
 
-function TaskFormComponent({ onSubmit, isEditing }: Props): React.ReactElement {
+function TaskFormComponent({
+  onSubmit,
+  isEditing,
+  defaultValue,
+}: Props): React.ReactElement {
   const navigate = useNavigate();
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState(
+    defaultValue ? defaultValue : ""
+  );
 
   const handleTextareaChange = useCallback(
     (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -25,9 +33,13 @@ function TaskFormComponent({ onSubmit, isEditing }: Props): React.ReactElement {
     []
   );
 
-  const saveTask = useCallback(() => {
-    onSubmit(description);
-  }, [description]);
+  const saveTask = useCallback(
+    (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      onSubmit(description);
+    },
+    [description]
+  );
 
   const discardChanges = useCallback(() => {
     navigate(-1);
@@ -49,6 +61,7 @@ function TaskFormComponent({ onSubmit, isEditing }: Props): React.ReactElement {
             name="task"
             placeholder="Enter text here ..."
             onChange={handleTextareaChange}
+            value={description}
           />
         </StyledLabel>
       </form>
@@ -56,4 +69,4 @@ function TaskFormComponent({ onSubmit, isEditing }: Props): React.ReactElement {
   );
 }
 
-export const TaskForm = memo(TaskFormComponent);
+export const TaskForm = observer(TaskFormComponent);
