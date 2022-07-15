@@ -11,7 +11,7 @@ import { TaskItem } from "./task-item";
 function TaskListComponent(): React.ReactElement {
   const navigate = useNavigate();
   const store = useStore();
-  const [selectedTasks, setSelectedTasks] = useState<TaskType[] | undefined>();
+  const [selectedTasks, setSelectedTasks] = useState<TaskType[]>([]);
 
   useEffect(() => {
     store.setEditingTask(undefined);
@@ -38,7 +38,7 @@ function TaskListComponent(): React.ReactElement {
 
   const deleteTask = useCallback((task: TaskType) => {
     store.deleteTasks([task]);
-    setSelectedTasks(undefined);
+    setSelectedTasks([]);
   }, []);
 
   const deleteSelectedTask = useCallback(() => {
@@ -46,7 +46,7 @@ function TaskListComponent(): React.ReactElement {
       store.deleteTasks(selectedTasks);
     }
 
-    setSelectedTasks(undefined);
+    setSelectedTasks([]);
   }, [selectedTasks]);
 
   return (
@@ -54,7 +54,10 @@ function TaskListComponent(): React.ReactElement {
       <ActionsWrapper>
         <Link to="/create-task">create a task</Link>
         {store.tasks.length === 0 ? null : (
-          <DeleteButton onClick={deleteSelectedTask} disabled={!selectedTasks}>
+          <DeleteButton
+            onClick={deleteSelectedTask}
+            disabled={selectedTasks.length === 0}
+          >
             Delete
           </DeleteButton>
         )}
