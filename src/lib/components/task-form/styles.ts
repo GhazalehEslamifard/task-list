@@ -32,6 +32,18 @@ export const StyledTextarea = styled.textarea`
   :focus {
     border: 1px solid cornflowerblue;
   }
+
+  @media (max-width: 768px) {
+    width: calc(600px - 48px);
+  }
+
+  @media (max-width: 600px) {
+    width: calc(500px - 48px);
+  }
+
+  @media (max-width: 480px) {
+    width: calc(400px - 48px);
+  }
 `;
 export const StyledLabel = styled.label`
   display: inline-block;
@@ -56,4 +68,16 @@ export const Container = styled.div`
   width: 700px;
   height: 500px;
   background: #f5f7ff;
+
+  @media (max-width: 768px) {
+    width: 600px;
+  }
+
+  @media (max-width: 600px) {
+    width: 500px;
+  }
+
+  @media (max-width: 480px) {
+    width: 400px;
+  }
 `;

@@ -6,6 +6,18 @@ export const List = styled.ul`
   overflow: auto;
   padding: 0;
   background: #f5f7ff;
+
+  @media (max-width: 768px) {
+    width: 600px;
+  }
+
+  @media (max-width: 600px) {
+    width: 500px;
+  }
+
+  @media (max-width: 480px) {
+    width: 400px;
+  }
 `;
 
 export const DeleteButton = styled.button`
