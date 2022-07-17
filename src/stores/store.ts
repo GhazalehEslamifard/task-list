@@ -5,10 +5,19 @@ import { taskList } from "../mockData";
 
 import { Task, TaskType } from "./task";
 
+export enum Filter {
+  All = "ALL",
+  Important = "IMPORTANT",
+}
+
 export const Store = types
   .model("Tasks", {
     tasks: types.array(Task),
     editingTask: types.maybe(types.reference(Task)),
+    filter: types.optional(
+      types.enumeration<Filter>(Object.values(Filter)),
+      Filter.All
+    ),
   })
   .actions((self) => ({
     deleteTasks(tasks: TaskType[]) {
@@ -19,6 +28,19 @@ export const Store = types
     },
     setEditingTask(task: TaskType | undefined) {
       self.editingTask = task;
+    },
+    setFilter(filter: Filter) {
+      self.filter = filter;
+    },
+  }))
+  .views((self) => ({
+    get filteredTasks() {
+      switch (self.filter) {
+        case Filter.All:
+          return self.tasks;
+        case Filter.Important:
+          return self.tasks.filter((task) => task.hasStarTag === true);
+      }
     },
   }));
 

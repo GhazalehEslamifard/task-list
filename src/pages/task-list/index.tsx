@@ -2,10 +2,10 @@ import { observer } from "mobx-react-lite";
 import { useCallback, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import { useStore } from "../../stores/store";
+import { useStore, Filter } from "../../stores/store";
 import { TaskType } from "../../stores/task";
 
-import { List, DeleteButton, ActionsWrapper } from "./styles";
+import { List, DeleteButton, ActionsWrapper, FilterButton } from "./styles";
 import { TaskItem } from "./task-item";
 
 function TaskListComponent(): React.ReactElement {
@@ -16,6 +16,14 @@ function TaskListComponent(): React.ReactElement {
   useEffect(() => {
     store.setEditingTask(undefined);
   });
+
+  const filterTasks = useCallback(() => {
+    if (store.filter === Filter.All) {
+      store.setFilter(Filter.Important);
+    } else {
+      store.setFilter(Filter.All);
+    }
+  }, []);
 
   const toggleStarTag = useCallback((task: TaskType) => {
     task.toggleStarTag();
@@ -53,6 +61,9 @@ function TaskListComponent(): React.ReactElement {
     <>
       <ActionsWrapper>
         <Link to="/create-task">create a task</Link>
+        <FilterButton onClick={filterTasks} filter={store.filter}>
+          {store.filter === Filter.All ? "Important tasks" : "All tasks"}
+        </FilterButton>
         {store.tasks.length === 0 ? null : (
           <DeleteButton
             onClick={deleteSelectedTask}
@@ -63,7 +74,7 @@ function TaskListComponent(): React.ReactElement {
         )}
       </ActionsWrapper>
       <List>
-        {store.tasks.map((task) => (
+        {store.filteredTasks.map((task) => (
           <TaskItem
             task={task}
             onToggleStarTag={toggleStarTag}

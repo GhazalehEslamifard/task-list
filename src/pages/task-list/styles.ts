@@ -1,5 +1,7 @@
 import styled from "@emotion/styled";
 
+import { Filter } from "../../stores/store";
+
 export const List = styled.ul`
   width: 700px;
   height: 500px;
@@ -20,23 +22,36 @@ export const List = styled.ul`
   }
 `;
 
-export const DeleteButton = styled.button`
+const Button = styled.button`
   all: unset;
-  width: 104px;
   height: 32px;
   color: white;
   border-radius: 4px;
   text-align: center;
   box-sizing: border-box;
+  margin-left: 8px;
+
+  :focus {
+    outline: 2px solid cornflowerblue;
+  }
+`;
+
+export const DeleteButton = styled(Button)`
+  width: 104px;
   background: rgba(255, 116, 56, 0.8);
 
   :disabled {
     background: rgba(255, 116, 56, 0.3);
   }
+`;
 
-  :focus {
-    outline: 2px solid cornflowerblue;
-  }
+export const FilterButton = styled(Button)<{ filter: Filter }>`
+  width: 128px;
+  background: rgba(98, 196, 147, 0.8);
+  background: ${({ filter }) =>
+    filter === Filter.All
+      ? "rgba(98, 196, 147, 0.8)"
+      : "rgba(37, 194, 78, 0.8)"};
 `;
 
 export const ActionsWrapper = styled.div`
