@@ -9,10 +9,13 @@ function CreateTaskComponent() {
   const store = useStore();
   const navigate = useNavigate();
 
-  const handleSubmit = useCallback((description: string) => {
-    store.createTask(description);
-    navigate("/");
-  }, []);
+  const handleSubmit = useCallback(
+    (description: string) => {
+      store.createTask(description);
+      navigate("/");
+    },
+    [navigate]
+  );
 
   return <TaskForm onSubmit={handleSubmit} isEditing={false} />;
 }

@@ -38,12 +38,12 @@ function TaskFormComponent({
       event.preventDefault();
       onSubmit(description);
     },
-    [description]
+    [description, onSubmit]
   );
 
   const discardChanges = useCallback(() => {
     navigate(-1);
-  }, []);
+  }, [navigate]);
 
   return (
     <Container>

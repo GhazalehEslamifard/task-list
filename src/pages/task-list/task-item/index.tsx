@@ -29,12 +29,15 @@ function TaskItemComponent({
   selectedTasks,
   onCheckboxChange,
 }: Props): React.ReactElement {
-  const handleToggleStarTag = useCallback(() => onToggleStarTag(task), [task]);
-  const handleDeleteTask = useCallback(() => onDelete(task), [task]);
-  const handleEditTask = useCallback(() => onEdit(task), [task]);
+  const handleToggleStarTag = useCallback(
+    () => onToggleStarTag(task),
+    [task, onToggleStarTag]
+  );
+  const handleDeleteTask = useCallback(() => onDelete(task), [task, onDelete]);
+  const handleEditTask = useCallback(() => onEdit(task), [task, onEdit]);
   const handleCheckboxChange = useCallback(() => {
     onCheckboxChange(task);
-  }, [task]);
+  }, [task, onCheckboxChange]);
 
   return (
     <ListItem>

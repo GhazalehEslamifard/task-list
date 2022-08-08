@@ -29,10 +29,13 @@ function TaskListComponent(): React.ReactElement {
     task.toggleStarTag();
   }, []);
 
-  const setEditingTask = useCallback((task: TaskType) => {
-    store.setEditingTask(task);
-    navigate(`edit-task/:${task.id}`);
-  }, []);
+  const setEditingTask = useCallback(
+    (task: TaskType) => {
+      store.setEditingTask(task);
+      navigate(`edit-task/:${task.id}`);
+    },
+    [navigate]
+  );
 
   const handleSetSelectedTasks = useCallback((task: TaskType) => {
     setSelectedTasks((prevState) =>

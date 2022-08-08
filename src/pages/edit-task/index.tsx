@@ -15,13 +15,16 @@ function EditTaskComponent() {
     }
   }, [store.editingTask]);
 
-  const handleSubmit = useCallback((description: string) => {
-    if (store.editingTask) {
-      store.editingTask.editTask(description);
-    }
+  const handleSubmit = useCallback(
+    (description: string) => {
+      if (store.editingTask) {
+        store.editingTask.editTask(description);
+      }
 
-    navigate("/");
-  }, []);
+      navigate("/");
+    },
+    [navigate]
+  );
 
   return (
     <TaskForm
