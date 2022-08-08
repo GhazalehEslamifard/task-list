@@ -40,12 +40,15 @@ export const Store = types
           return self.tasks;
         case Filter.Important:
           return self.tasks.filter((task) => task.hasStarTag === true);
+        default:
+          return [];
       }
     },
   }));
 
 export type StoreType = Instance<typeof Store>;
 
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 export const StoreContext = createContext<StoreType>(null!);
 
 export function useStore(): StoreType {
