@@ -1,8 +1,9 @@
 import React from "react";
 
-import { Provider } from "./provider";
+import { Provider } from "../providers/provider";
+import { store } from "../stores/store";
+
 import { AppRouts } from "./routs";
-import { store } from "./stores/store";
 
 function App() {
   return (

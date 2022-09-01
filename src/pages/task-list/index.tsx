@@ -2,8 +2,8 @@ import { observer } from "mobx-react-lite";
 import { useCallback, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import { useStore, Filter } from "../../stores/store";
-import { TaskType } from "../../stores/task";
+import { useStore } from "../../stores/store";
+import { Filter, TaskType } from "../../types";
 
 import { List, DeleteButton, ActionsWrapper, FilterButton } from "./styles";
 import { TaskItem } from "./task-item";

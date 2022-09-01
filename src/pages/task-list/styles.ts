@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-import { Filter } from "../../stores/store";
+import { Filter } from "../../types";
 
 export const List = styled.ul`
   width: 700px;

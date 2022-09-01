@@ -1,6 +1,7 @@
 import { observer } from "mobx-react-lite";
 
-import { StoreContext, StoreType } from "./stores/store";
+import { StoreContext } from "../stores/store";
+import { StoreType } from "../types";
 
 interface Props {
   store: StoreType;

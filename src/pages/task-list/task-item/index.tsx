@@ -2,7 +2,7 @@ import { observer } from "mobx-react-lite";
 import { useCallback } from "react";
 
 import { CloseIcon, EditIcon, StarIcon } from "../../../lib/assets/icons";
-import { TaskType } from "../../../stores/task";
+import { TaskType } from "../../../types";
 import {
   Checkbox,
   ListItem,
