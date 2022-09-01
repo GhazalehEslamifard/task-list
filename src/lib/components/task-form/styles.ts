@@ -7,11 +7,10 @@ export const StyledButton = styled.button`
   text-align: center;
   box-sizing: border-box;
   border-radius: 4px;
-  color: white;
-  background: rgba(255, 255, 255, 0.2);
+  color: ${({ theme }) => theme.simple.white};
 
   :focus {
-    border: 1px solid cornflowerblue;
+    border: ${({ theme }) => `1px solid ${theme.colors.focused}`};
   }
 `;
 
@@ -25,12 +24,12 @@ export const StyledTextarea = styled.textarea`
   min-height: 200px;
   white-space: break-spaces;
   word-wrap: break-word;
-  color: black;
-  border: 1px solid #dbdbdb;
-  background: rgba(255, 255, 255, 0.5);
+  color: ${({ theme }) => theme.simple.black};
+  border: ${({ theme }) => `1px solid ${theme.colors.shadow}`};
+  background: ${({ theme }) => theme.simple.white};
 
   :focus {
-    border: 1px solid cornflowerblue;
+    border: ${({ theme }) => `1px solid ${theme.colors.focused}`};
   }
 
   @media (max-width: 768px) {
@@ -47,7 +46,7 @@ export const StyledTextarea = styled.textarea`
 `;
 export const StyledLabel = styled.label`
   display: inline-block;
-  color: #7a7a7a;
+  color: ${({ theme }) => theme.colors.title};
   margin: 24px;
 `;
 
@@ -57,17 +56,17 @@ export const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-around;
-  background: #765df0;
+  background: ${({ theme }) => theme.colors.header_background};
 
   h1 {
-    color: white;
+    color: ${({ theme }) => theme.simple.white};
   }
 `;
 
 export const Container = styled.div`
   width: 700px;
   height: 500px;
-  background: #f5f7ff;
+  background: ${({ theme }) => theme.colors.background};
 
   @media (max-width: 768px) {
     width: 600px;

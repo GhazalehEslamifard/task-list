@@ -7,7 +7,7 @@ export const List = styled.ul`
   height: 500px;
   overflow: auto;
   padding: 0;
-  background: #f5f7ff;
+  background: ${({ theme }) => theme.colors.background};
 
   @media (max-width: 768px) {
     width: 600px;
@@ -25,33 +25,32 @@ export const List = styled.ul`
 const Button = styled.button`
   all: unset;
   height: 32px;
-  color: white;
+  color: ${({ theme }) => theme.simple.white};
   border-radius: 4px;
   text-align: center;
   box-sizing: border-box;
   margin-left: 8px;
 
   :focus {
-    outline: 2px solid cornflowerblue;
+    outline: ${({ theme }) => `2px solid ${theme.colors.focused}`};
   }
 `;
 
 export const DeleteButton = styled(Button)`
   width: 104px;
-  background: rgba(255, 116, 56, 0.8);
+  background: ${({ theme }) => theme.button.delete};
 
   :disabled {
-    background: rgba(255, 116, 56, 0.3);
+    background: ${({ theme }) => theme.button.delete};
   }
 `;
 
 export const FilterButton = styled(Button)<{ filter: Filter }>`
   width: 128px;
-  background: rgba(98, 196, 147, 0.8);
-  background: ${({ filter }) =>
+  background: ${({ filter, theme }) =>
     filter === Filter.All
-      ? "rgba(98, 196, 147, 0.8)"
-      : "rgba(37, 194, 78, 0.8)"};
+      ? theme.button.filter.all
+      : theme.button.filter.important};
 `;
 
 export const ActionsWrapper = styled.div`
@@ -60,13 +59,13 @@ export const ActionsWrapper = styled.div`
 
   a {
     all: unset;
-    color: cornflowerblue;
+    color: ${({ theme }) => theme.colors.focused};
     margin-right: 16px;
     padding: 4px;
     border-radius: 4px;
 
     :focus {
-      outline: 2px solid cornflowerblue;
+      outline: ${({ theme }) => `2px solid ${theme.colors.focused}`};
     }
   }
 `;
@@ -77,8 +76,8 @@ export const ListItem = styled.li`
   justify-content: space-around;
   list-style-type: none;
   line-height: 32px;
-  background: white;
-  box-shadow: 1px 1px 8px 1px #dedede;
+  background: ${({ theme }) => theme.simple.white};
+  box-shadow: ${({ theme }) => `1px 1px 8px 1px ${theme.colors.shadow}`};
   border-radius: 5px;
   margin: 4px 16px;
 
@@ -92,7 +91,7 @@ export const ListItem = styled.li`
     justify-content: center;
 
     :focus {
-      outline: 2px solid cornflowerblue;
+      outline: ${({ theme }) => `2px solid ${theme.colors.focused}`};
     }
   }
 `;
@@ -103,17 +102,16 @@ export const StyledLabel = styled.label`
 
 export const Checkbox = styled.input`
   -webkit-appearance: none;
-  background-color: #fafafa;
-  border: 1px solid #cacece;
+  background-color: ${({ theme }) => theme.checkbox.unchecked};
+  border: ${({ theme }) => `1px solid ${theme.checkbox.border}`};
   padding: 9px;
   border-radius: 50%;
   display: inline-block;
   position: relative;
 
   :checked {
-    background-color: #09b385;
-    border: 1px solid #adb8c0;
-    color: #99a1a7;
+    background-color: ${({ theme }) => theme.checkbox.checked};
+    border: ${({ theme }) => `1px solid ${theme.checkbox.border}`};
   }
 
   :checked:after {
@@ -122,11 +120,11 @@ export const Checkbox = styled.input`
     position: absolute;
     top: 0;
     left: 3px;
-    color: white;
+    color: ${({ theme }) => theme.simple.white};
   }
 
   :focus {
-    outline: 2px solid cornflowerblue;
+    outline: ${({ theme }) => `2px solid ${theme.colors.focused}`};
   }
 `;
 
@@ -139,7 +137,10 @@ export const StyledSpan = styled.p`
 
 export const StarButton = styled.button<{ isActivated: boolean }>`
   svg {
-    fill: ${({ isActivated }): string => (isActivated ? "#e8b923" : "#e6e6e6")};
+    fill: ${({ isActivated, theme }): string =>
+      isActivated
+        ? `${theme.colors.activated_star}`
+        : `${theme.colors.deactivated_star}`};
   }
 `;
 

@@ -1,8 +1,9 @@
-import { Global } from "@emotion/react";
+import { Global, ThemeProvider } from "@emotion/react";
 import React from "react";
 import ReactDOM from "react-dom/client";
 
 import App from "./App";
+import { theme } from "./lib/themes/theme";
 import reportWebVitals from "./reportWebVitals";
 import { globalStyles } from "./styles";
 
@@ -10,10 +11,10 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-  <React.StrictMode>
+  <ThemeProvider theme={theme}>
     <Global styles={globalStyles} />
     <App />
-  </React.StrictMode>
+  </ThemeProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
